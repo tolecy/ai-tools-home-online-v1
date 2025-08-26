@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 自定义滚动条样式 */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent dark:bg-gray-800/20;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300/50 dark:bg-gray-700/40 rounded-full hover:bg-gray-400/60 dark:hover:bg-gray-600/50;
+}
+
+@layer base {
+  /* 添加主题切换过渡动画 */
+  * {
+    @apply transition-colors duration-200;
+  }
+}
