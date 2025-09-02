@@ -25,7 +25,7 @@
       <language-switcher />
       <theme-btn />
       <div v-if="userInfo" class="flex items-center gap-4">
-        <div class=" px-4 py-1 rounded bg-teal-600 text-white dark:bg-gray-800 dark:text-white">{{ userInfo.username || getEmailPrefix(userInfo.email) }}</div>
+        <div class="cursor-pointer px-4 py-1 rounded bg-teal-600 text-white dark:bg-gray-800 dark:text-white" @click="goProfile">{{ userInfo.username || getEmailPrefix(userInfo.email) }}</div>
         <div class="cursor-pointer login-btn" @click="handleLogout">Logout</div>
       </div>
       <div v-else @click="visibleLogin = true" class="cursor-pointer login-btn">Login</div>
@@ -78,8 +78,15 @@ const handleLogout = async () => {
   window.location.reload()
 }
 
+const localePath = useLocalePath()
 const goHome = () => {
-  window.location.href = '/'
+  const path = localePath('/')
+  window.location.href = path
+}
+
+const goProfile = () => {
+  const path = localePath('/profile')
+  window.location.href = path
 }
 
 onMounted(async () => {

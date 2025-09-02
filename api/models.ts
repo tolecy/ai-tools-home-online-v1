@@ -20,7 +20,34 @@ const chat = (params: any): any => {
   }
 }
 
+/** 正则表达式翻译（从需求生成正则） */
+const translateRegex = (params: any): any => {
+  try {
+    return httpRequest.post('/api/v1/models/translate_regex', params)
+  } catch (error) {
+    console.error(error)
+    throw error
+  }
+}
+
+/** 单图生图 */
+const generateImageBy1p = (params: any): any => {
+  try {
+    return httpRequest.post('/api/v1/models/generate_image_by_1p', params, {
+      responseType: 'blob',
+      headers: {
+        Accept: 'image/*'
+      }
+    })
+  } catch (error) {
+    console.error(error)
+    throw error
+  }
+}
+
 export {
   getModels,
-  chat
+  chat,
+  translateRegex,
+  generateImageBy1p
 }

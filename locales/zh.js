@@ -6,6 +6,32 @@ export default {
     docs: '文档',
     pricing: '价格'
   },
+  pay: {
+    ready: {
+      title: '即将进入 Stripe 支付',
+      autoRedirect: '{s}s 后将自动跳转',
+      goNow: '立即前往 Stripe 支付',
+      cancel: '取消',
+      back: '返回'
+    },
+    checkout: {
+      title: '安全支付',
+      back: '返回',
+      errors: {
+        restoreFailed: '无法恢复支付，请重试',
+        createFailed: '创建支付会话失败，请登录后重试'
+      }
+    },
+    result: {
+      title: '支付结果',
+      success: '支付成功！积分将很快到账。',
+      canceled: '您已取消支付。',
+      failed: '支付失败，请稍后重试。',
+      loading: '正在查询支付状态...',
+      toPricing: '返回套餐',
+      toProfile: '查看账户'
+    }
+  },
   language: {
     switch: '切换语言',
     current: '当前语言'
@@ -17,6 +43,12 @@ export default {
   },
   models: {
     title: 'AI 模型',
+    llmAgents: {
+      regexAssistant: {
+        name: '正则表达式助手',
+        description: '根据需求与示例生成可用的正则表达式'
+      }
+    },
     llm: {
       title: '大语言模型',
       gpt4: {
@@ -112,9 +144,31 @@ export default {
     payMonthly: '按月付费',
     savePercent: '节省 20% - 30%',
     perMonth: '/月',
+    oneTime: '一次性',
+    buy: '购买',
     subscribe: '订阅',
     portal: '入口',
     free: '免费',
+    bundles: {
+      title: '消息包',
+      generic: '{credits} 条消息 · 一次性购买，永久有效',
+      pack4500: {
+        title: '4,500 条消息',
+        feature: '一次性购买，永久有效'
+      },
+      pack9000: {
+        title: '9,000 条消息',
+        feature: '一次性购买，永久有效'
+      },
+      pack47000: {
+        title: '47,000 条消息',
+        feature: '一次性购买，永久有效'
+      },
+      pack100000: {
+        title: '100,000 条消息',
+        feature: '一次性购买，永久有效'
+      }
+    },
     plans: {
       free: {
         title: '免费版',
@@ -148,6 +202,35 @@ export default {
           4: '调整所有消息长度',
           5: '增强沉浸模式'
         }
+      }
+    }
+  }
+  ,
+  pages: {
+    regexAssistant: {
+      title: '正则表达式助手',
+      fields: {
+        requirement: '需求简述',
+        exampleString: '示例字符串',
+        outputFormat: '期望结果格式'
+      },
+      placeholders: {
+        requirement: '例如：提取邮箱地址',
+        exampleString: '例如：请联系我：test(at)example.com',
+        outputFormat: '例如：邮箱地址本身'
+      },
+      actions: {
+        submit: '提交',
+        submitting: '生成中...',
+        reset: '重置'
+      },
+      result: {
+        title: '生成的正则表达式',
+        copy: '复制'
+      },
+      messages: {
+        fillAllFields: '请完整填写表单',
+        generateFailed: '生成失败，请确认已登录且有足够额度'
       }
     }
   }

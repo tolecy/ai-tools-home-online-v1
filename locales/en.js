@@ -6,6 +6,32 @@ export default {
     docs: 'Docs',
     pricing: 'Pricing'
   },
+  pay: {
+    ready: {
+      title: 'Entering Stripe Payment',
+      autoRedirect: 'Will auto redirect in {s}s',
+      goNow: 'Go to Stripe now',
+      cancel: 'Cancel',
+      back: 'Back'
+    },
+    checkout: {
+      title: 'Stripe Checkout',
+      back: 'Back',
+      errors: {
+        restoreFailed: 'Unable to restore payment, please retry',
+        createFailed: 'Failed to create payment session, please login and retry'
+      }
+    },
+    result: {
+      title: 'Payment Result',
+      success: 'Payment successful! Credits will arrive shortly.',
+      canceled: 'You canceled the payment.',
+      failed: 'Payment failed, please try again later.',
+      loading: 'Checking payment status...',
+      toPricing: 'Back to Plans',
+      toProfile: 'View Account'
+    }
+  },
   language: {
     switch: 'Switch Language',
     current: 'Current Language'
@@ -17,6 +43,12 @@ export default {
   },
   models: {
     title: 'AI Models',
+    llmAgents: {
+      regexAssistant: {
+        name: 'Regex Assistant',
+        description: 'Generate a usable regex from your requirement and examples'
+      }
+    },
     llm: {
       title: 'Large Language Models',
       gpt4: {
@@ -112,9 +144,31 @@ export default {
     payMonthly: 'Pay Monthly',
     savePercent: 'Save 20% - 30%',
     perMonth: '/per month',
+    oneTime: 'one-time',
+    buy: 'Buy',
     subscribe: 'Subscribe',
     portal: 'Portal',
     free: 'Free',
+    bundles: {
+      title: 'Message Packs',
+      generic: '{credits} messages · one-time purchase, no expiry',
+      pack4500: {
+        title: '4,500 messages',
+        feature: 'One-time purchase, no expiry'
+      },
+      pack9000: {
+        title: '9,000 messages',
+        feature: 'One-time purchase, no expiry'
+      },
+      pack47000: {
+        title: '47,000 messages',
+        feature: 'One-time purchase, no expiry'
+      },
+      pack100000: {
+        title: '100,000 messages',
+        feature: 'One-time purchase, no expiry'
+      }
+    },
     plans: {
       free: {
         title: 'Free',
@@ -148,6 +202,35 @@ export default {
           4: 'Adjust all message lengths',
           5: 'Enhance Immersion Mode'
         }
+      }
+    }
+  }
+  ,
+  pages: {
+    regexAssistant: {
+      title: 'Regex Assistant',
+      fields: {
+        requirement: 'Requirement Summary',
+        exampleString: 'Example String',
+        outputFormat: 'Expected Output Format'
+      },
+      placeholders: {
+        requirement: 'e.g., Extract email address',
+        exampleString: 'e.g., Please contact me: test(at)example.com',
+        outputFormat: 'e.g., The email address itself'
+      },
+      actions: {
+        submit: 'Submit',
+        submitting: 'Generating...',
+        reset: 'Reset'
+      },
+      result: {
+        title: 'Generated Regular Expression',
+        copy: 'Copy'
+      },
+      messages: {
+        fillAllFields: 'Please fill in all fields',
+        generateFailed: 'Failed to generate. Ensure you are logged in and have enough credits.'
       }
     }
   }

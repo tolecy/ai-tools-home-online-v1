@@ -1,6 +1,6 @@
 <template>
-  <nav class="flex align-middle py-2 size-4 h-fit" aria-label="breadcrumb">
-    <div v-for="(item, index) in items" :key="item.to">
+  <nav class="flex items-center py-2 whitespace-nowrap overflow-x-auto" aria-label="breadcrumb">
+    <div v-for="(item, index) in items" :key="item.to" class="inline-flex items-center">
       <!-- 非最后一项使用可点击链接 -->
       <NuxtLink 
         v-if="index < items.length - 1" 

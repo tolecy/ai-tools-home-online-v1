@@ -40,10 +40,27 @@
       <div class="model-category" v-for="category in otherCategories" :key="category.id">
         <h2 class="text-2xl font-semibold mb-4">{{ $t(`models.categories.${category.id}`) }}</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div class="model-card disabled">
-            <h3 class="text-xl font-medium mb-2">{{ $t('models.comingSoon.title') }}</h3>
-            <p class="text-gray-600">{{ $t('models.comingSoon.description') }}</p>
-          </div>
+          <!-- LLM Agents 分类：展示可用的工具卡片 -->
+          <template v-if="category.id === 'llm-agents'">
+            <div class="model-card cursor-pointer" @click="navigateToRegexAgent">
+              <h3 class="text-xl font-medium mb-2">{{ $t('models.llmAgents.regexAssistant.name') }}</h3>
+              <p class="text-gray-600">{{ $t('models.llmAgents.regexAssistant.description') }}</p>
+            </div>
+          </template>
+          <!-- Vision Models：链接到独立页面 -->
+          <template v-else-if="category.id === 'vision-models'">
+            <div class="model-card cursor-pointer" @click="navigateToVision">
+              <h3 class="text-xl font-medium mb-2">Bandai Style Model</h3>
+              <p class="text-gray-600">Upload an image and generate a Bandai Style 3D model. Using Crazy Nano Banana model. </p>
+            </div>
+          </template>
+          <!-- 其他分类：占位 -->
+          <template v-else>
+            <div class="model-card disabled">
+              <h3 class="text-xl font-medium mb-2">{{ $t('models.comingSoon.title') }}</h3>
+              <p class="text-gray-600">{{ $t('models.comingSoon.description') }}</p>
+            </div>
+          </template>
         </div>
       </div>
     </div>
@@ -75,7 +92,17 @@ const navigateToPlayground = (modelId) => {
   navigateTo(`/${locale.value}/models/playground?model=${modelId}`)
 }
 
+const navigateToRegexAgent = () => {
+  navigateTo(`/${locale.value}/models/agents/regex`)
+}
+
+const navigateToVision = () => {
+  navigateTo(`/${locale.value}/models/vision/generate_1p_bandai`)
+}
+
 const { data: llmModels } = await getModels()
+
+
 </script>
 
 <style scoped>

@@ -9,7 +9,7 @@ export default defineNuxtConfig({
   app: {
     head: {
       meta: [
-        { name: 'Content-Security-Policy', content: "default-src 'self'; script-src 'self' 'unsafe-inline' https://accounts.google.com https://*.googleapis.com; connect-src 'self' https://fastaitool.xyz; img-src 'self' data: https:; style-src 'self' 'unsafe-inline';" },
+        { name: 'Content-Security-Policy', content: "default-src 'self'; script-src 'self' 'unsafe-inline' https://accounts.google.com https://*.googleapis.com https://js.stripe.com; connect-src 'self' http://localhost:8000 https://fastaitool.xyz https://api.stripe.com; frame-src https://js.stripe.com https://hooks.stripe.com; img-src 'self' data: https:; style-src 'self' 'unsafe-inline';" },
         { name: 'X-Content-Type-Options', content: 'nosniff' },
         { name: 'X-XSS-Protection', content: '1; mode=block' },
         { name: 'Referrer-Policy', content: 'strict-origin-when-cross-origin' }

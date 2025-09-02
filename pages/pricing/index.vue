@@ -24,11 +24,30 @@
         :title="price.title"
         ></PriceCard>
     </div>
+
+    <!-- One-time Message Packs -->
+    <div class="max-w-7xl mx-auto mt-14">
+      <h2 class="text-xl md:text-2xl font-bold mb-6 text-center">{{ $t('pricing.bundles.title') }}</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <PriceCard
+          v-for="(bundle, idx) in bundles"
+          :key="`bundle-${idx}`"
+          :title="bundle.title"
+          :price="bundle.price"
+          :features="bundle.features"
+          :priceSuffix="t('pricing.oneTime')"
+          :ctaKey="'pricing.buy'"
+          @subscribe="buy(bundle, idx)"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 const { t, locale } = useI18n()
+const localePath = useLocalePath()
+import http from '../../common/request'
 
 // 定义基础价格数据结构
 const basePrices = [
@@ -76,4 +95,48 @@ const prices = computed(() =>
     features: basePrice.featureKeys.map(key => t(key))
   }))
 )
+
+// one-time bundles
+const bundles = ref<{ key: string; title: string; price: number; features: string[] }[]>([])
+
+onMounted(async () => {
+  // 从后端读取数据库套餐
+  try {
+    const res: any = await http.get('/api/v1/payments/bundles')
+    const list = res?.data?.value || []
+    bundles.value = list.map((b: any) => ({
+      key: b.key,
+      title: b.title,
+      price: Math.round((b.amount_cents || 0) / 100),
+      features: [t('pricing.bundles.generic', { credits: b.credits })]
+    }))
+  } catch (e) {
+    console.error('load bundles failed', e)
+  }
+})
+
+if (process.client) {
+  window.addEventListener('storage', (e) => {
+    if (e.key === 'pricing_bundles_updated') {
+      // 重新加载 bundles
+      ;(async () => {
+        try {
+          const res: any = await http.get('/api/v1/payments/bundles')
+          const list = res?.data?.value || []
+          bundles.value = list.map((b: any) => ({
+            key: b.key,
+            title: b.title,
+            price: Math.round((b.amount_cents || 0) / 100),
+            features: [t('pricing.bundles.generic', { credits: b.credits })]
+          }))
+        } catch (e) {}
+      })()
+    }
+  })
+}
+
+const buy = (bundle: { key: string; title: string; price: number }, idx: number) => {
+  const path = localePath('/pay/ready')
+  navigateTo({ path, query: { bundle: bundle.key } })
+}
 </script>
